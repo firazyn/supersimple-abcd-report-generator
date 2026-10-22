@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABCD Report Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <aside class="panel">
+      <header class="panel-head">
+        <h1>ABCD Report Generator</h1>
+        <p>by firazyn (<a href="https://github.com/firazyn" target="_blank" rel="noopener">github.com/firazyn</a>)</p>
+      </header>
+
+      <div class="panel-scroll">
+        <section class="group">
+          <div class="group-head"><h2>Header</h2></div>
+          <label class="field">
+            <span>Nama</span>
+            <input id="name" type="text" maxlength="40" placeholder="Nama kamu" autocomplete="off">
+          </label>
+          <div class="row">
+            <label class="field">
+              <span>Tanggal</span>
+              <input id="date" type="date">
+            </label>
+            <label class="field">
+              <span>Format tanggal</span>
+              <select id="dateLang">
+                <option value="en-GB">English</option>
+                <option value="id-ID">Indonesia</option>
+              </select>
+            </label>
+          </div>
+          <p class="hint">Judul di laporan: <b id="titlePreview"></b></p>
+        </section>
+
+        <div id="sections"></div>
+      </div>
+
+      <footer class="actions">
+        <div class="row actions-row">
+          <label class="field scale-field">
+            <span>Ukuran PNG</span>
+            <select id="scale">
+              <option value="1">1× (1440 × 1027)</option>
+              <option value="2">2× (2880 × 2054)</option>
+              <option value="3">3× (4320 × 3081)</option>
+            </select>
+          </label>
+        </div>
+        <div class="row">
+          <button type="button" id="download" class="btn primary" title="Download PNG">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            <span>Download</span>
+          </button>
+          <button type="button" id="copy" class="btn" title="Salin gambar ke clipboard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Salin</span>
+          </button>
+          <button type="button" id="reset" class="btn ghost" title="Kembalikan ke contoh awal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+            <span>Reset</span>
+          </button>
+        </div>
+      </footer>
+    </aside>
+
+    <main class="stage">
+      <div class="canvas-wrap">
+        <canvas id="report" width="1440" height="1027" aria-label="Pratinjau ABCD report"></canvas>
+      </div>
+      <p class="meta">Pratinjau · resolusi asli 1440 × 1027 px</p>
+    </main>
+
+  </div>
+
+  <dialog id="resetModal" class="modal" aria-labelledby="resetTitle">
+    <form method="dialog">
+      <div class="modal-body">
+        <div class="modal-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        </div>
+        <h3 id="resetTitle">Reset semua isi?</h3>
+        <p>Nama dan semua isi ABCD akan dikembalikan ke contoh awal. Tindakan ini tidak bisa dibatalkan.</p>
+      </div>
+      <div class="modal-actions">
+        <button type="submit" value="cancel" class="btn" autofocus>Batal</button>
+        <button type="submit" value="confirm" class="btn danger">Ya, reset</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
